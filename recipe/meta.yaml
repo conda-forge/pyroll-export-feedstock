@@ -1,5 +1,5 @@
 {% set name = "pyroll-export" %}
-{% set version = "2.2.0" %}
+{% set version = "3.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pyroll_export-{{ version }}.tar.gz
-  sha256: 6d71cab1e10a8d5d4860f81f1962619423e05e42784971fbbe6b202f787ec3ba
+  sha256: 5b3c7edb9e7e097d2880e2ff7b473008f5e861bab36d9148f5be9f07f24883ca
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -21,7 +21,7 @@ requirements:
     - pip
   run:
     - python >={{ python_min }}
-    - pyroll-core >=2.0,<3.dev0
+    - pyroll-core >=3.0,<4.dev0
     - pluggy >=1.0,<2.dev0
     - pandas >=2.0,<3.dev0
     - lxml >=5.0,<6.dev0
