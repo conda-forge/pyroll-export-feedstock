@@ -1,0 +1,49 @@
+schema_version: 1
+
+context:
+  name: pyroll-export
+  version: "3.0.0"
+  python_min: "3.11"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/pyroll_export-${{ version }}.tar.gz
+  sha256: 5b3c7edb9e7e097d2880e2ff7b473008f5e861bab36d9148f5be9f07f24883ca
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - hatchling
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - pyroll-core >=3.0,<4.dev0
+    - pluggy >=1.0,<2.dev0
+    - pandas >=2.0,<3.dev0
+    - lxml >=5.0,<6.dev0
+    - pyyaml >=6.0,<7.dev0
+
+tests:
+  - python:
+      imports:
+        - pyroll.export
+      pip_check: true
+      python_version: ${{ python_min }}
+
+about:
+  summary: PyRoll rolling simulation framework - data export.
+  license: BSD-3-Clause
+  license_file: LICENSE
+  homepage: https://pyroll.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
